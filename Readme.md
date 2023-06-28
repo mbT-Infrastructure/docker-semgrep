@@ -1,20 +1,18 @@
-# Docker image
+# Semgrep image
 
-This Docker image contains ...
-
-It does ...
+This Docker image contains a semgrep installation.
 
 
 ## Environment variables
 
-- `VARIABLE`
-    - Set to `true` to enable ..., default: ``.
+- `SEMGREP_SEND_METRICS`
+    - Configure semgrep metrics, default: `off`.
 
 
 ## Volumes
 
-- `/media/volume`
-    - The input and output directory of the files to ...
+- `/media/workdir`
+    - The directory of the project to analyze.
 
 
 ## Development
