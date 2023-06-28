@@ -1,0 +1,9 @@
+version: "3.8"
+
+services:
+
+    semgrep:
+        container_name: semgrep
+        build: .
+        volumes:
+            - ".:/media/workdir"
