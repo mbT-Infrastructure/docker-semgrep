@@ -44,7 +44,6 @@ ENV SEMGREP_RULES="\
     p/kotlin \
     p/kubernetes \
     p/lockfiles \
-    p/mobsfscan \
     p/nextjs \
     p/nginx \
     p/nodejs \
