@@ -2,9 +2,99 @@ FROM madebytimo/python
 
 RUN pip3 install semgrep
 
-ENV SEMGREP_SEND_METRICS=off
+ENV SEMGREP_SEND_METRICS="off"
+ENV SEMGREP_ENABLE_VERSION_CHECK=0
+ENV SEMGREP_RULES="\
+    p/bandit \
+    p/brakeman \
+    p/c \
+    p/ci \
+    p/clientside-js \
+    p/command-injection \
+    p/comment \
+    p/csharp \
+    p/cwe-top-25 \
+    p/deepsemgrep \
+    p/django \
+    p/docker \
+    p/docker-compose \
+    p/dockerfile \
+    p/electron-desktop-app \
+    p/eslint \
+    p/eslint-plugin-security \
+    p/expressjs \
+    p/findsecbugs \
+    p/flask \
+    p/flawfinder \
+    p/github-actions \
+    p/gitlab \
+    p/gitlab-bandit \
+    p/gitlab-eslint \
+    p/gitleaks \
+    p/go-command-injection \
+    p/golang \
+    p/gosec \
+    p/headless-browser \
+    p/insecure-transport \
+    p/insecure-transport-jsnode \
+    p/java \
+    p/java-command-injection \
+    p/javascript \
+    p/javascript-command-injection \
+    p/juice-shop \
+    p/jwt \
+    p/kotlin \
+    p/kubernetes \
+    p/lockfiles \
+    p/mobsfscan \
+    p/nextjs \
+    p/nginx \
+    p/nodejs \
+    p/nodejsscan \
+    p/ocaml \
+    p/owasp-flask \
+    p/owasp-java-benchmark \
+    p/owasp-sf \
+    p/owasp-top-ten \
+    p/php \
+    p/php-laravel \
+    p/phpcs-security-audit \
+    p/play \
+    p/python \
+    p/python-command-injection \
+    p/python-flask-meetup \
+    p/r2c \
+    p/r2c-best-practices \
+    p/r2c-bug-scan \
+    p/r2c-ci \
+    p/r2c-owasp-presentation \
+    p/r2c-security-audit \
+    p/raghav-test \
+    p/react \
+    p/react-best-practices \
+    p/react-team-tier \
+    p/reverse-shells \
+    p/ruby \
+    p/ruby-command-injection \
+    p/ruby-on-rails-xss \
+    p/rust \
+    p/scala \
+    p/secrets \
+    p/security-audit \
+    p/security-code-scan \
+    p/semgrep-go-correctness \
+    p/semgrep-misconfigurations \
+    p/semgrep-rule-lints \
+    p/sql-injection \
+    p/supply-chain \
+    p/swift \
+    p/terraform \
+    p/trailofbits \
+    p/typescript \
+    p/vuln-finding \
+    p/wordpress \
+    p/xss"
 
 WORKDIR /media/workdir
 
-CMD [ "semgrep", "ci", "--config", "auto", "--disable-version-check", \
-    "--output", "test-results/semgrep-results.txt" ]
+CMD [ "semgrep", "ci", "--output", "test-results/semgrep-results.txt" ]
