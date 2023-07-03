@@ -16,9 +16,7 @@ ENV SEMGREP_RULES="\
     p/cwe-top-25 \
     p/deepsemgrep \
     p/django \
-    p/docker \
     p/docker-compose \
-    p/dockerfile \
     p/electron-desktop-app \
     p/eslint \
     p/eslint-plugin-security \
