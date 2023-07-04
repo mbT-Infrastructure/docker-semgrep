@@ -66,7 +66,6 @@ ENV SEMGREP_RULES="\
     p/r2c-ci \
     p/r2c-owasp-presentation \
     p/r2c-security-audit \
-    p/raghav-test \
     p/react \
     p/react-best-practices \
     p/react-team-tier \
