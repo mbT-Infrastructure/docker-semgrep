@@ -1,10 +1,22 @@
+FROM madebytimo/scripts AS builder
+
+WORKDIR /root/builder/
+
+RUN download.sh --name semgrep-rules.tar.gz \
+    https://github.com/madebyTimo/semgrep-rules/archive/refs/heads/main.tar.gz \
+    && compress.sh --decompress semgrep-rules.tar.gz \
+    && mv semgrep-rules-main/src/rules semgrep-rules \
+    && rm -r semgrep-rules.tar.gz semgrep-rules-main
+
 FROM madebytimo/python
 
 RUN pip3 install semgrep
 
+COPY --from=builder /root/builder/semgrep-rules /media/semgrep-rules
+
 ENV SEMGREP_SEND_METRICS="off"
 ENV SEMGREP_ENABLE_VERSION_CHECK=0
-ENV SEMGREP_RULES="\
+ENV SEMGREP_RULES="/media/semgrep-rules \
     p/bandit \
     p/brakeman \
     p/c \
@@ -24,7 +36,6 @@ ENV SEMGREP_RULES="\
     p/findsecbugs \
     p/flask \
     p/flawfinder \
-    p/github-actions \
     p/gitlab \
     p/gitlab-bandit \
     p/gitlab-eslint \
@@ -89,7 +100,11 @@ ENV SEMGREP_RULES="\
     p/typescript \
     p/vuln-finding \
     p/wordpress \
-    p/xss"
+    p/xss \
+    r/yaml.github-actions.security.allowed-unsecure-commands.allowed-unsecure-commands \
+    r/yaml.github-actions.security.run-shell-injection.run-shell-injection \
+    r/yaml.github-actions.security.pull-request-target-code-checkout.\
+pull-request-target-code-checkout"
 
 WORKDIR /media/workdir
 
