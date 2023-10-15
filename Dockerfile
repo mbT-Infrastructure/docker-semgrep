@@ -20,15 +20,10 @@ ENV SEMGREP_RULES="/media/semgrep-rules \
     p/bandit \
     p/brakeman \
     p/c \
-    p/ci \
     p/clientside-js \
-    p/command-injection \
-    p/comment \
     p/csharp \
     p/cwe-top-25 \
-    p/deepsemgrep \
     p/django \
-    p/docker-compose \
     p/electron-desktop-app \
     p/eslint \
     p/eslint-plugin-security \
@@ -63,7 +58,6 @@ ENV SEMGREP_RULES="/media/semgrep-rules \
     p/owasp-flask \
     p/owasp-java-benchmark \
     p/owasp-sf \
-    p/owasp-top-ten \
     p/php \
     p/php-laravel \
     p/phpcs-security-audit \
@@ -74,7 +68,6 @@ ENV SEMGREP_RULES="/media/semgrep-rules \
     p/r2c \
     p/r2c-best-practices \
     p/r2c-bug-scan \
-    p/r2c-ci \
     p/r2c-owasp-presentation \
     p/r2c-security-audit \
     p/react \
@@ -101,6 +94,9 @@ ENV SEMGREP_RULES="/media/semgrep-rules \
     p/vuln-finding \
     p/wordpress \
     p/xss \
+    r/yaml.docker-compose.security.privileged-service.privileged-service \
+    r/yaml.docker-compose.security.seccomp-confinement-disabled.seccomp-confinement-disabled \
+    r/yaml.docker-compose.security.selinux-separation-disabled.selinux-separation-disabled \
     r/yaml.github-actions.security.allowed-unsecure-commands.allowed-unsecure-commands \
     r/yaml.github-actions.security.run-shell-injection.run-shell-injection \
     r/yaml.github-actions.security.pull-request-target-code-checkout.\
