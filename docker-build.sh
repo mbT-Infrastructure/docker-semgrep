@@ -4,6 +4,7 @@ set -e
 BUILD_ARGUMENTS=()
 DEPENDENCIES=(docker)
 UPDATE_BASE=false
+REGISTRY_USER="madebytimo"
 REPOSIITORY_NAME="docker-semgrep"
 
 # help message
@@ -21,7 +22,7 @@ done
 
 # check dependencies
 for CMD in "${DEPENDENCIES[@]}"; do
-    if [[ -z "$(which $CMD)" ]]; then
+    if [[ -z "$(which "$CMD")" ]]; then
         echo "\"${CMD}\" is missing!"
         exit 1
     fi
@@ -47,7 +48,7 @@ BASE_IMAGE="$(tac Dockerfile | grep --max-count=1 "FROM" | cut -d" " -f2)"
 docker pull "$BASE_IMAGE"
 BASE_IMAGE_DATE="$(docker image inspect --format="{{ .Created }}" "$BASE_IMAGE" | cut -d "T" -f1)"
 echo "Base image is $BASE_IMAGE from $BASE_IMAGE_DATE"
-IMAGE="madebytimo/${REPOSIITORY_NAME#docker-}"
+IMAGE="${REGISTRY_USER}/${REPOSIITORY_NAME#docker-}"
 if [[ "$UPDATE_BASE" == true ]]; then
     docker pull "$IMAGE"
     PUSHED_IMAGE_DATE="$(docker image inspect --format="{{ .Created }}" "$IMAGE" | cut -d "T" -f1)"
