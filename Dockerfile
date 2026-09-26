@@ -10,7 +10,9 @@ RUN download.sh --name semgrep-rules.tar.gz \
 
 FROM madebytimo/python
 
-RUN pip3 install semgrep
+RUN apt update -qq && apt install -y -qq git \
+    && rm -rf /var/lib/apt/lists/* \
+    && pip3 install semgrep
 
 COPY --from=builder /root/builder/semgrep-rules /media/semgrep-rules
 
@@ -99,8 +101,7 @@ ENV SEMGREP_RULES="/media/semgrep-rules \
     r/yaml.docker-compose.security.selinux-separation-disabled.selinux-separation-disabled \
     r/yaml.github-actions.security.allowed-unsecure-commands.allowed-unsecure-commands \
     r/yaml.github-actions.security.run-shell-injection.run-shell-injection \
-    r/yaml.github-actions.security.pull-request-target-code-checkout.\
-pull-request-target-code-checkout"
+    r/yaml.github-actions.security.pull-request-target-code-checkout.pull-request-target-code-checkout"
 
 WORKDIR /media/workdir
 

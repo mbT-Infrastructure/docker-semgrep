@@ -1,9 +1,8 @@
-version: "3.8"
-
 services:
 
     semgrep:
         container_name: semgrep
         build: .
+        mem_limit: 100M
         volumes:
             - ".:/media/workdir"
