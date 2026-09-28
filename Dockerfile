@@ -1,4 +1,4 @@
-FROM madebytimo/scripts AS builder
+FROM --platform=$BUILDPLATFORM docker.io/madebytimo/scripts AS builder
 
 WORKDIR /root/builder/
 
@@ -13,7 +13,7 @@ RUN VERSION="$(download.sh --output - \
     && compress.sh --decompress semgrep-rules.tar.zst \
     && rm semgrep-rules.tar.zst semgrep-rules-release.json
 
-FROM madebytimo/python
+FROM docker.io/madebytimo/python
 
 RUN apt update -qq && apt install -y -qq git \
     && rm -rf /var/lib/apt/lists/* \
