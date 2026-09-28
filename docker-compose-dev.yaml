@@ -3,6 +3,6 @@ services:
     semgrep:
         container_name: semgrep
         build: .
-        mem_limit: 100M
+        mem_limit: 500M
         volumes:
             - ".:/media/workdir"

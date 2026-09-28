@@ -2,17 +2,24 @@ FROM madebytimo/scripts AS builder
 
 WORKDIR /root/builder/
 
-RUN download.sh --name semgrep-rules.tar.gz \
-    https://github.com/madebyTimo/semgrep-rules/archive/refs/heads/main.tar.gz \
-    && compress.sh --decompress semgrep-rules.tar.gz \
-    && mv semgrep-rules-main/src/rules semgrep-rules \
-    && rm -r semgrep-rules.tar.gz semgrep-rules-main
+ADD https://api.github.com/repos/madebyTimo/semgrep-rules/releases/latest semgrep-rules-release.json
+RUN VERSION="$(download.sh --output - \
+        https://api.github.com/repos/madebyTimo/semgrep-rules/releases/latest \
+        | sed --silent 's|^\s*"tag_name": "\(.*\)".*$|\1|p' \
+        | head --lines 1)" \
+    && ls -la && echo "Version: $VERSION" \
+    && download.sh --name semgrep-rules.tar.zst \
+    "https://github.com/madebyTimo/semgrep-rules/releases/download/${VERSION}/semgrep-rules-${VERSION}.tar.zst" \
+    && compress.sh --decompress semgrep-rules.tar.zst \
+    && rm semgrep-rules.tar.zst semgrep-rules-release.json
 
 FROM madebytimo/python
 
 RUN apt update -qq && apt install -y -qq git \
     && rm -rf /var/lib/apt/lists/* \
-    && pip3 install semgrep
+    && pip3 install semgrep \
+    \
+    && git config --global --add safe.directory '*'
 
 COPY --from=builder /root/builder/semgrep-rules /media/semgrep-rules
 

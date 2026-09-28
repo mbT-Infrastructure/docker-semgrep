@@ -63,7 +63,7 @@ jobs:
             - name: Build
               if: ${{ github.event_name != 'schedule'}}
               run: |
-                  if [[ ${{ github.ref }} == 'refs/heads/main' ]]; then
+                  if [[ "${GITHUB_REF}" == 'refs/heads/main' ]]; then
                       builder/build.sh --publish
                   else
                       builder/build.sh
@@ -106,7 +106,7 @@ jobs:
               run: |
                   for CACHE in $(gh cache list \
                           --key docker-semgrep-build-cache \
-                          --ref ${{ github.ref}} \
+                          --ref "${GITHUB_REF}" \
                           | cut --fields 1); do
                       echo "Deleting cache \"$CACHE\"."
                       gh cache delete "$CACHE"
