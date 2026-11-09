@@ -1,9 +1,12 @@
 # folders
 __pycache__/
+.agent/
 .bsp/
+.gradle/
 .idea/
-.svelte-kit/
+.kotlin/
 .metals/
+.svelte-kit/
 .temp*/
 .vscode/
 build/
@@ -17,6 +20,7 @@ test-results/
 .DS_Store
 .env
 .iml
+local.properties
 package-lock.json
 
 # exclude
